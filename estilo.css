@@ -1,0 +1,235 @@
+body{
+    background-color: black;/*Cor de fundo da pagina*/
+    color: rgb(14, 194, 38);/*cor da letra das palavras*/
+    font-family: Arial, sans-serif;/*O tipo de fonte*/
+    font-size: 18pt;/*tamanho da fonte*/
+}
+
+#titulo{
+    /*centralizar titulo*/
+        white-space: nowrap;
+        text-align: center;
+    /*Fim centralizar titulo*/
+}
+
+#dialogos{
+    /*centralizar dialogos*/
+        text-align: center;
+    /*Fim centralizar dialogos*/
+}
+.texto{
+    /*centralizar dialogos e não ficar tão espaçados*/
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+    /*Fim centralizar dialogos e não ficar tão espaçados*/
+}
+
+#interacao{
+    /*posicionar a div a baixo da pagina*/
+        position: fixed;
+        bottom: 1%;
+    /*Fim posicionar a div a baixo da pagina*/
+    
+    /*posicionar a div a baixo da pagina*/
+        display: inline;
+        float: left;
+    /*Fim posicionar a div a baixo da pagina*/
+
+    height: 50px;/*O tamanho da altura div*/
+    width: 99%;/*O tamanho da largura div*/
+}
+
+#s{/*Botão de sim*/
+    width: 8%;
+    height: 5%;
+    float: left;
+    margin-left: 36.5%;
+}
+
+#n{/*Botão de não*/
+    width: 8%;
+    height: 5%;
+    float: left;
+    margin-left: 10%;
+}
+
+#respostas{
+    height: 100%;/*O tamanho da altura input*/
+    width: 90%;/*O tamanho da largura input*/
+}
+#enviar{
+    margin-left: -0.8%;/*Para posicionar o button no local certo*/
+    height: 112%;/*O tamanho da altura button*/
+    width: 9%;/*O tamanho da largura button*/
+}
+
+/*A janela que mostra as mensagem ao usuario*/
+.alert-box{
+   display:block;
+   position:fixed;
+   width:95%;
+   padding:5px 20px 20px;
+   background:#222222;
+   border:1px solid #030303;
+   text-align:center;
+   transform:translate(-50%,-50%);
+   top:50%;
+   left:50%;
+   z-index:99999;
+   -webkit-box-shadow: 0px 0px 33px -6px rgba(0,0,0,0.59);
+   -moz-box-shadow: 0px 0px 33px -6px rgba(0,0,0,0.59);
+   box-shadow: 0px 0px 33px -6px rgba(0,0,0,0.59);
+}
+
+/*Imagem de sangue*/
+#imagem{
+    float: left;
+    position: absolute;
+    width: 98%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 30% auto;
+    background-position-y: 0%;
+}
+
+/*inicio efeito de confete*/
+    .confetti {
+        margin-top: -10%;
+        width: 15px;
+        height: 15px;
+        background-color: #f2d74e;
+        position: absolute;
+        left: 50%;
+        -webkit-animation: confetti 5s ease-in-out -2s infinite;
+        animation: confetti 5s ease-in-out -2s infinite;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+    }
+
+    .confetti:nth-child(1) {
+        background-color: #f2d74e;
+        left: 10%;
+        -webkit-animation-delay: 0;
+        animation-delay: 0;
+    }
+
+    .confetti:nth-child(2) {
+        background-color: #95c3de;
+        left: 20%;
+        -webkit-animation-delay: -5s;
+        animation-delay: -5s;
+    }
+
+    .confetti:nth-child(3) {
+        background-color: #ff9a91;
+        left: 30%;
+        -webkit-animation-delay: -3s;
+        animation-delay: -3s;
+    }
+
+    .confetti:nth-child(4) {
+        background-color: #f2d74e;
+        left: 40%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+
+    .confetti:nth-child(5) {
+        background-color: #95c3de;
+        left: 50%;
+        -webkit-animation-delay: -4s;
+        animation-delay: -4s;
+    }
+
+    .confetti:nth-child(6) {
+        background-color: #ff9a91;
+        left: 60%;
+        -webkit-animation-delay: -6s;
+        animation-delay: -6s;
+    }
+
+    .confetti:nth-child(7) {
+        background-color: #f2d74e;
+        left: 70%;
+        -webkit-animation-delay: -1.5s;
+        animation-delay: -1.5s;
+    }
+
+    .confetti:nth-child(8) {
+        background-color: #95c3de;
+        left: 80%;
+        -webkit-animation-delay: -2s;
+        animation-delay: -2s;
+    }
+
+    .confetti:nth-child(9) {
+        background-color: #ff9a91;
+        left: 90%;
+        -webkit-animation-delay: -3.5s;
+        animation-delay: -3.5s;
+    }
+
+    .confetti:nth-child(10) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+
+    @-webkit-keyframes confetti {
+        0% {
+            -webkit-transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+            transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+        }
+
+        25% {
+            -webkit-transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+            transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+        }
+
+        50% {
+            -webkit-transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+            transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+        }
+
+        75% {
+            -webkit-transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+            transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+        }
+
+        100% {
+            -webkit-transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+            transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+        }
+    }
+
+    @keyframes confetti {
+        0% {
+            -webkit-transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+            transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+        }
+
+        25% {
+            -webkit-transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+            transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+        }
+
+        50% {
+            -webkit-transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+            transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+        }
+
+        75% {
+            -webkit-transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+            transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+        }
+
+        100% {
+            -webkit-transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+            transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+        }
+    }
+/*Fim efeito de confete*/

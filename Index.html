@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Enigmas</title>
+        <link rel="stylesheet" href="estilo.css">
+        <script type="application/json" src="Epilogo.json"></script>
+    </head>
+    <body onload="lerArquivo('introducao')">
+        <div id="imagem"><!--vai receber uma imagem-->
+            <h1 id="titulo">Epilogo</h1><!-- Nome de cada parte do jogo -->
+            <div id="dialogos"></div><!-- Onde vai se desenvolver a historia do jogo -->
+
+            <div id="interacao"><!-- Div estetica, feita só para posicionar os elementos -->
+                <input id="respostas" type="text"/><!-- Onde o jogador vai interagir com o jogo -->
+                <button id="enviar" onclick="resposta()">-></button><!-- Onde vai enviar a informação para o jogo -->
+            </div>
+        </div>
+    </body>
+    <script src="principal.js"></script>
+
+</html>

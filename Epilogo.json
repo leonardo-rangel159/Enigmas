@@ -1,0 +1,35 @@
+{
+    "introducao":[
+        "O grande heroi está de volta para sua cidade",
+        "quando a vista um grande monstro uma quimera",
+        "Com rosto de mulher, corpo de leão, asas de águia",
+        "Eis que quando chega perto o monstro ele diz",
+        "<h2 style='text-align:center;'>Decifra-me ou te devoro?</h2>",
+        "<button id='s' onclick=botao('sim')>Sim</button><button id='n' onclick=botao('nao')>Não</button><br>"
+    ],
+    "resposta0": ["sim", "s", "y", "yes", "aceitar", "aceito", "Decifra-me", "Decifro"],
+
+    "titulo1": "Fase 1",
+    "questao1": ["O que é, o que é? De manhã anda de quatro, ao meio-dia, sobre duas pernas, e, pela tarde, com três pernas"],
+    "resposta1": ["o ser humano", "ser humano", "humano"],
+
+    "titulo2": "Fase 2",
+    "questao2": ["O que é, o que é? Sem sair do seu cantinho, é capaz de viajar ao redor do mundo"],
+    "resposta2": ["o selo", "selo"],
+
+    "titulo3": "Fase 3",
+    "questao3": ["O que é, o que é? É feito de água, mas se for colocado dentro da água morrerá"],
+    "resposta3": ["gelo", "o gelo"],
+
+    "titulo4": "Fase 4",
+    "questao4": ["O que é, o que é? Você tira a minha pele. Eu não choro. Você, sim"],
+    "resposta4": ["a cebola", "cebola"],
+
+    "titulo5": "Fase 5",
+    "questao5": ["O que é, o que é? Está sempre a caminho, mas nunca chega"],
+    "resposta5": ["o amanhã", "amanhã"],
+
+    "titulo6": "Fase 6",
+    "questao6": ["O que é, o que é? Quando você me vira de lado, sou tudo. Quando me corta ao meio, não sou nada"],
+    "resposta6": ["8", "numero 8", "oito", "numero oito"]
+}
