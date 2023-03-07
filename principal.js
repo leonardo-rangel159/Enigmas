@@ -6,6 +6,7 @@ function apagar(a, valor){//função para apagar a messagem ao usuario
     document.querySelector("#respostas").value = "";//apagar o que está na aréa digitavel
     document.querySelector("#imagem").style.backgroundImage = "none";//apagar a imagem de fundo
     document.querySelector(".confete") == null ? '' : document.querySelector(".confete").remove() ;//remover os confetes caso eles existam
+    valor == 0? valor= "Epilogo": '';//se o valor for 0 alterar epilogo
     valor == 'undefined' ? (Pontuacao = 0, lerArquivo('introducao'), document.querySelector("#titulo").innerHTML = 'Epilogo') : document.querySelector("#titulo").innerHTML = fase;//Alterando o titulo ou irá renciar o jogo, pois o jogador ganhou
     document.querySelector("#dialogos") = "";//limpar o que está no dialogos
     lerArquivo(`questao${Pontuacao}`);//chama a função lerAquivo para continuar o jogo
