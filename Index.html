@@ -6,20 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Enigmas</title>
-        <link rel="stylesheet" href="estilo.css">
-        <script type="application/json" src="Epilogo.json"></script>
+        <link rel="stylesheet" href="estilo.css"> <!-- Vincula o arquivo de estilo CSS externo à página -->
+        <script src="principal.js"></script> <!-- Inclui o arquivo JavaScript principal -->
     </head>
-    <body onload="lerArquivo('introducao')">
-        <div id="imagem"><!--vai receber uma imagem-->
-            <h1 id="titulo">Epilogo</h1><!-- Nome de cada parte do jogo -->
-            <div id="dialogos"></div><!-- Onde vai se desenvolver a historia do jogo -->
+     <body onload="lerArquivo('introducao')"> <!-- Executa a função 'lerArquivo' com o argumento 'introducao' quando a página é carregada -->
 
-            <div id="interacao"><!-- Div estetica, feita só para posicionar os elementos -->
-                <input id="respostas" type="text"/><!-- Onde o jogador vai interagir com o jogo -->
-                <button id="enviar" onclick="resposta()">-></button><!-- Onde vai enviar a informação para o jogo -->
+        <div id="imagem"> <!-- Contêiner principal que envolve o conteúdo do jogo -->
+            <div id="narrativa"> <!-- Seção que contém o título e os diálogos do jogo -->
+                <h1 id="titulo">Epilogo</h1> <!-- Título da seção do jogo -->
+                <div id="dialogos" class="alert-box"></div> <!-- Área onde os diálogos e a história do jogo serão exibidos -->
+            </div>
+
+            <div id="interacao"> <!-- Contêiner para os elementos de interação do jogador -->
+                <input id="respostas" type="text" disabled/> <!-- Campo de texto onde o jogador pode inserir respostas, inicialmente desativado -->
+                <button id="enviar" onclick="resposta()" disabled>-></button> <!-- Botão para enviar a resposta inserida, inicialmente desativado -->
             </div>
         </div>
     </body>
-    <script src="principal.js"></script>
-
 </html>

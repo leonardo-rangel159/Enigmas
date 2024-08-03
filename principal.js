@@ -1,120 +1,163 @@
-Pontuacao = 0;//A pontuação vai ser usado para saber se usuario acertou as respostas ou não
-fase = 0;//qual fazer usuario está
+Pontuacao = 0; // A pontuação será usada para saber se o usuário acertou as respostas ou não
+fase = 0; // Indica em qual fase o usuário está
 
-function apagar(a, valor){//função para apagar a messagem ao usuario
-    document.querySelector(`.${a}`).remove();//apagar a div de messagem
-    document.querySelector("#respostas").value = "";//apagar o que está na aréa digitavel
-    document.querySelector("#imagem").style.backgroundImage = "none";//apagar a imagem de fundo
-    document.querySelector(".confete") == null ? '' : document.querySelector(".confete").remove() ;//remover os confetes caso eles existam
-    document.querySelector("#dialogos").innerHTML = "";//limpar o que está no dialogos
-    valor == 'undefined' || valor == 0 ? (Pontuacao = 0, lerArquivo('introducao'), document.querySelector("#titulo").innerHTML = 'Epilogo') : document.querySelector("#titulo").innerHTML = fase;//Alterando o titulo ou irá renciar o jogo, pois o jogador ganhou
-    lerArquivo(`questao${Pontuacao}`);//chama a função lerAquivo para continuar o jogo
+function apagar(valor) {
+    // Função para apagar as mensagens ao usuário e reiniciar o jogo, se necessário
+    document.querySelector("#respostas").value = ""; // Apaga o que está na área de entrada de texto
+    document.querySelector("body").style.backgroundImage = "none"; // Remove a imagem de fundo
+    document.querySelector(".confete") == null ? '' : document.querySelector(".confete").remove(); // Remove os confetes, caso existam
+    document.querySelector("#dialogos").innerHTML = ""; // Limpa o que está nos diálogos
+
+    // Alterando o título ou reiniciando o jogo, se o jogador ganhou
+    if (valor == 'undefined' || valor == 0) {
+        lerArquivo('introducao');
+        document.querySelector("#titulo").innerHTML = 'Epilogo';
+    } else {
+        document.querySelector("#titulo").innerHTML = fase;
+        lerArquivo(`questao${Pontuacao}`); // Chama a função lerArquivo para continuar o jogo
+        document.querySelector("#respostas").disabled = false;
+        document.querySelector("#enviar").disabled = false;
+    }
 }
 
-function lerArquivo(a){//Essa função tem como objetivo ler o arquivo json e escrever ele na tela
-    let escrita = document.querySelector("#dialogos");//pega a parte onde vai ser introduzido os textos
-    fetch("Epilogo.json").then((resposta) => {//Passa o json para variavel resposta
-        resposta.json().then((dados) => {//Passa o json resposta para um array dados
-            dados[a].map((a) => {//pega o valor dentro array que tem valor de a e passa o map que pecorrer o array
-                escrita.innerHTML += `<p class="texto"> ${a} </p>`;//escrive na tela o que está dentro do array
-            })
-        })
-    })
-} 
+function lerArquivo(a) {
+    // Essa função tem como objetivo ler o arquivo JSON e exibir o conteúdo na tela
+    let escrita = document.querySelector("#dialogos"); // Seleciona a área onde os textos serão introduzidos
+    fetch("Epilogo.json").then((resposta) => { // Obtém o arquivo JSON
+        resposta.json().then((dados) => { // Converte a resposta em JSON
+            dados[a].map((a) => { // Percorre o array correspondente a 'a'
+                escrita.innerHTML += `<p class="texto"> ${a} </p>`; // Escreve na tela o conteúdo do array
+            });
+        });
+    });
+}
 
-function resposta(){//Essa função tem como objetivo verificar se a resposta do usuarios está certa ou não
-    let r = document.querySelector("#respostas").value.toLowerCase();//pega a resposta do usuario e passa para que todas as letras fiquem minusculas
-    let valor = `resposta${Pontuacao}`;//variavel para poder pegar o calor no array
-    let compara = Pontuacao;//variavel que vai se utilizada para compara se usuario acertou a resposta
+function resposta() {
+    // Função para verificar se a resposta do usuário está correta ou não
+    let r = document.querySelector("#respostas").value.toLowerCase(); // Obtém a resposta do usuário em letras minúsculas
+    let valor = `resposta${Pontuacao}`; // Variável para acessar o valor no array
+    let compara = Pontuacao; // Variável para comparar se o usuário acertou a resposta
 
-    fetch("Epilogo.json").then((resposta) => {//Passa o json para variavel resposta
-        resposta.json().then((dados) => {//Passa o json resposta para um array dados
-            dados[valor].map((resposta) => {//pega o valor dentro array que tem valor de valor e passa o map que pecorrer o array
-                if(r == resposta){//Caso a resposta do usuario esteja correta
-                    Pontuacao += 1;//a pontuação vai aumentar mostrando que acertou a resposta 
-                    fase = dados[`titulo${Pontuacao}`];//variavel que amargena a fase que está o jogador
-                    document.querySelector("#dialogos").innerHTML = "";//Apagando os dialos antigos
+    fetch("Epilogo.json").then((resposta) => { // Obtém o arquivo JSON
+        resposta.json().then((dados) => { // Converte a resposta em JSON
+            dados[valor].map((resposta) => { // Percorre o array correspondente a 'valor'
+                if (r == resposta) { // Se a resposta do usuário estiver correta
+                    Pontuacao += 1; // Incrementa a pontuação
+                    fase = dados[`titulo${Pontuacao}`]; // Armazena a fase atual do jogador
+                    document.querySelector("#dialogos").innerHTML = ""; // Limpa os diálogos antigos
                 }
-            })
+            });
 
-            if (Pontuacao == 0) {//caso o usuario não queira começar a jogar
-                let msg_alerta = '<div class="alert-box" style="color: rgb(193, 250, 36);">'//variavel formata a mensagem que ira ser exibida ao usuario
-                +'<h1>HAHAHA</h1>'
-                +'<p><h2>Você é um covarde!</h2> </h3>Os covardes devem morrer<h3> <br>Da proxima tente aceitar o meu desavio</p>'
-                +'<input style="padding:5px 10px;" type="button" value="OK" onclick="apagar(\'alert-box\',0)"/>'
-                +'</div>';
-                document.querySelector("#imagem").style.backgroundImage = "url('imagens/sangues.gif')";
-                document.querySelector("#dialogos").innerHTML += msg_alerta;//A mensagem que ira ser exibida ao usuario
-            } 
-            else if (Pontuacao == compara && Pontuacao > 0) {//caso usuario erre a resposta
-                let msg_alerta = '<div class="alert-box" style="color: red;">'//variavel formata a mensagem que ira ser exibida ao usuario
-                +'<h1>Já era esperdo que você fosse errar</h1>'
-                +'<h2>Agora será minha janta</h2>'
-                +'<input style="padding:5px 10px;" type="button" value="OK" onclick="apagar(\'alert-box\',\''+fase+'\')"/>'
-                +'<audio controls autoplay style="visibility: hidden; display:none;"> <source src="musica/morte.mp3" type="audio/mpeg">'
-                +'</div>';
-                document.querySelector("#imagem").style.backgroundImage = "url('imagens/sangues.gif')";
-                document.querySelector("#dialogos").innerHTML += msg_alerta;//A mensagem que ira ser exibida ao usuario
-            }
-            else if (Pontuacao == 1){//Caso usuario aceite iniciar o jogo
-                let msg_alerta = '<div class="alert-box" style="color: #fc782b;">'//variavel formata a mensagem que ira ser exibida ao usuario
-                +'<h1>Parece que você tem um pouco de coragem ou deseja morrer mesmo</h1>'
-                +'<h2>Que os jogos comecem!!!</h2>'
-                +'<input style="padding:5px 10px;" type="button" value="OK" onclick="apagar(\'alert-box\',\''+fase+'\')"/>'
-                +'<audio controls autoplay style="visibility: hidden; display:none;"> <source src="musica/inicio.mp3" type="audio/mpeg">'
-                +'</div>';
-                document.querySelector("#dialogos").innerHTML += msg_alerta;//A mensagem que ira ser exibida ao usuario
-            }
-            else if(Pontuacao > 1 && fase != undefined) {//caso usuario acerte
-                let msg_alerta = '<div class="alert-box" style="color: rgba(75, 253, 229, 0.993);">'//variavel formata a mensagem que ira ser exibida ao usuario
-                +'<h1>A certou</h1>'
-                +'<h2>É que esse era fácil, o próximo será mais difícil</h2>'
-                +'<input style="padding:5px 10px;" type="button" value="OK" onclick="apagar(\'alert-box\',\''+valor+'\')"/>'
-                +'<audio controls autoplay style="visibility: hidden; display:none;"> <source src="musica/vitoria.mp3" type="audio/mpeg">'
-                +'</div>';
-
-                document.querySelector("#imagem").innerHTML +='<div class="confete">' //adicionar um efeito de confete
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'</div>'
-                document.querySelector("#dialogos").innerHTML += msg_alerta;//A mensagem que ira ser exibida ao usuario               
-            }
-            else{//quando usuario acabar o jogo
-                let msg_alerta = '<div class="alert-box" style="color: 04ad1bab;">'//variavel formata a mensagem que ira ser exibida ao usuario
-                +'<h1>Você me ganhou</h1>'
-                +'<h2>aceito minha derota, para você humano</h2>'
-                +'<input style="padding:5px 10px;" type="button" value="jogar novamente" onclick="apagar(\'alert-box\',\''+fase+'\')"/>'
-                +'<audio controls autoplay style="visibility: hidden; display:none;"> <source src="musica/vitoria.mp3" type="audio/mpeg">'
-                +'</div>';
-
-                document.querySelector("#imagem").innerHTML +='<div class="confete">' //adicionar um efeito de confete
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'<div class="confetti"></div>'
-                +'</div>'
-                document.querySelector("#dialogos").innerHTML += msg_alerta;//A mensagem que ira ser exibida ao usuario 
+            // Verifica a pontuação e exibe mensagens apropriadas
+            if (Pontuacao === 0) {
+                document.querySelector("#dialogos").innerHTML = "";
+                mostrarMensagemNaoIncio(); // Mostra mensagem de erro se a pontuação for 0
+            } else if (Pontuacao === compara && Pontuacao > 0) {
+                document.querySelector("#dialogos").innerHTML = "";
+                mostrarMensagemErro(); // Mostra mensagem de erro se a pontuação não mudou
+                document.querySelector("#respostas").disabled = true;
+                document.querySelector("#enviar").disabled = true;
+            } else if (Pontuacao === 1) {
+                mostrarMensagemInicio(); // Mostra mensagem de início se a pontuação for 1
+            } else if (Pontuacao > 1 && fase !== undefined) {
+                mostrarMensagemAcerto(); // Mostra mensagem de acerto se a pontuação for maior que 1 e a fase não for indefinida
             }
 
-        })
-    })
+            // Verifica se o jogador ganhou
+            if (fase === undefined) {
+                mostrarMensagemGanhou(); // Mostra mensagem de vitória
+            }
+        });
+    });
+
+    document.querySelector("#respostas").value = ""; // Limpa a área de entrada de texto
 }
 
-function botao(a){//Botão de inciar o jogo ou não
+function botao(a) {
+    // Botão para iniciar o jogo ou não
     document.querySelector("#respostas").value = a;
     resposta();
+}
+
+function mostrarMensagemErro() {
+    // Função para mostrar mensagem de erro
+    let msg_alerta = `
+        <div class="alert-box" style="color: red;">
+            <h1 class="ti">Já era esperado que você fosse errar</h1>
+            <h2 class="subT">Agora será minha janta</h2>
+            <input id="nao" style="padding:5px 10px;" type="button" value="Acerte na proxima" onclick="apagar('${fase}')"/>
+            <audio controls autoplay style="visibility: hidden; display:none;">
+                <source src="musica/morte.mp3" type="audio/mpeg">
+            </audio>
+        </div>`;
+    
+    sangue(); // Chama a função sangue para exibir o efeito
+    document.querySelector("#dialogos").innerHTML += msg_alerta;
+}
+
+function mostrarMensagemNaoIncio() {
+    // Função para mostrar mensagem de erro no início
+    let msg_alerta = `
+        <div class="alert-box" style="color: red;">
+            <h1 class="ti">Para os covardes só a morte</h1>
+            <input id="nao" style="padding:5px 10px;" type="button" value="Tente novamente" onclick="apagar('${fase}')"/>
+            <audio controls autoplay style="visibility: hidden; display:none;">
+                <source src="musica/morte.mp3" type="audio/mpeg">
+            </audio>
+        </div>`;
+
+    sangue(); // Chama a função sangue para exibir o efeito
+    document.querySelector("#dialogos").innerHTML += msg_alerta;
+}
+
+function mostrarMensagemInicio() {
+    // Função para mostrar mensagem de início
+    let msg_alerta = `
+        <div class="alert-box" style="color: #FF4500;">
+            <h1 class="ti">Parece que você tem um pouco de coragem ou deseja morrer mesmo</h1>
+            <h2 class="subT">Que o jogo comece!!!</h2>
+            <input id="ok" type="button" value="OK" onclick="apagar('${fase}')"/>
+            <audio controls autoplay style="visibility: hidden; display:none;">
+                <source src="musica/inicio.mp3" type="audio/mpeg">
+            </audio>
+        </div>`;
+    document.querySelector("#dialogos").innerHTML += msg_alerta;
+}
+
+function mostrarMensagemAcerto() {
+    // Função para mostrar mensagem de acerto
+    let msg_alerta = `
+        <div class="alert-box" style="color: #00FF00;">
+            <h1 class="ti">Acertou</h1>
+            <h2 class="subT">É que esse era fácil, o próximo será mais difícil</h2>
+            <input id="acertou" type="button" value="OK" onclick="apagar('resposta${Pontuacao}')"/>
+        </div>`;
+    document.querySelector("#dialogos").innerHTML += msg_alerta;
+}
+
+function mostrarMensagemGanhou() {
+    // Função para mostrar mensagem de vitória
+    let msg_alerta = `
+        <div class="alert-box" style="color: #04ad1bab;">
+            <h1 class="ti" style="text-shadow: 2px 4px #026102;">Você me ganhou</h1>
+            <h2 class="subT">Aceito minha derrota, humano</h2>
+            <input id="fim" type="button" value="jogar novamente" onclick="apagar(0)"/>
+            <audio controls autoplay style="visibility: hidden; display:none;">
+                <source src="musica/vitoria.mp3" type="audio/mpeg">
+            </audio>
+        </div>`;
+    
+    document.querySelector("#dialogos").innerHTML += msg_alerta;
+    document.querySelector("#respostas").disabled = true;
+    document.querySelector("#enviar").disabled = true;
+    Pontuacao = 0; // Reseta a pontuação
+}
+
+function sangue() {
+    // Função para exibir o efeito de sangue
+    let body = document.querySelector("body");
+    body.style.backgroundImage = "url('imagens/sangues.gif')";
+    body.style.backgroundRepeat = "repeat-x";
+    body.style.backgroundSize = "100% 100%";
+    body.style.width = "100%";
 }
